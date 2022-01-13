@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/honey/workspace/cvnew/build",
+  "command": "/bin/x86_64-linux-gnu-g++-9   -isystem /home/honey/mylib/lib/opencv-4.5.4/include/opencv4  -g   -o CMakeFiles/testcv.dir/main.cpp.o -c /home/honey/workspace/cvnew/main.cpp",
+  "file": "/home/honey/workspace/cvnew/main.cpp"
+}
+]
