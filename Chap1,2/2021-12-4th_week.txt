@@ -1,0 +1,5 @@
+On 2021-12-4th week
+
+Chap 1 - install OpenCV
+
+Chap 2 - Loading image and indroducing basic skills

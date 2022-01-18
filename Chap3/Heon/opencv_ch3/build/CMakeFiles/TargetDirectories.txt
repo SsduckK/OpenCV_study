@@ -1,0 +1,3 @@
+/home/honey/workspace/cvnew/build/CMakeFiles/edit_cache.dir
+/home/honey/workspace/cvnew/build/CMakeFiles/rebuild_cache.dir
+/home/honey/workspace/cvnew/build/CMakeFiles/testcv.dir
