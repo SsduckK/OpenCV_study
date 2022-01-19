@@ -1,5 +1,5 @@
 ### Vec 클래스
-> 하나의 행으로만 이루어진 행렬을 행 벡터라고 하고, 하나의 열로만 이루어진 행렬을 열 벡터라고 합니다. 행 벡터와 열 벡터를 합쳐서 벡터 또는 벡텨 행렬이라고 합니다. 즉, 벡터는 같은 자료형을 가진 원소 몇 개로 구성된 데이터 형식입니다.
+> 하나의 행으로만 이루어진 행렬을 행 벡터라고 하고, 하나의 열로만 이루어진 행렬을 열 벡터라고 합니다. 행 벡터와 열 벡터를 합쳐서 벡터 또는 벡터 행렬이라고 합니다. 즉, 벡터는 같은 자료형을 가진 원소 몇 개로 구성된 데이터 형식입니다.
 
 ```
 template<typename _Tp, int m, int n> class Matx { // 작은 크기의 행렬을 표현하기 위해 만들어진 템플릿 Matx클래스
@@ -7,7 +7,7 @@ public:
     _Tp val[m*n]; // 원소
 };
 
-template<typename _Tp, int cn> class Vec : public Matx<_tp, cn, 1> { // 작은 크기의 벡터를 표현하기 위해 만들어진 Vec클래스. Matx클래스를 상속받습니다.
+template<typename _Tp, int cn> class Vec : public Matx<_Tp, cn, 1> { // 작은 크기의 벡터를 표현하기 위해 만들어진 Vec클래스. Matx클래스를 상속받습니다.
 public:
     _Tp& opeartor[] (int i); // Vec클래스의 멤버 변수 배열에 접근할 수 있는 []연산자 재정의
 };
@@ -19,7 +19,7 @@ std:ostream operator << (std::ostream& out, const Vec<_tp, n>& vec); // C++ 표�
 ```
 Vec<uchar, 3> p1, p2(0, 0, 255); // Vec클래스 선언 방식
 ```
-+ 그러나 이 방식은 번거롭고 불편하기 때문에, OpenCV는 자주 사용되는 자료형과 개수에 대한 Vec클래스 템플릿의 이름 제정의를 제공합니다.
++ 그러나 이 방식은 번거롭고 불편하기 때문에, OpenCV는 자주 사용되는 자료형과 개수에 대한 Vec클래스 템플릿의 이름 재정의를 제공합니다.
 
 ```
 Vec<num-of-data> {x}
@@ -43,7 +43,7 @@ template<typename _Tp> class Scalar_ : public Vec<_Tp, 4>
 public:
     Scalar_();
     Scalar_(_Tp v0); // 그레이 스케일 영상일 경우, 영상의 명도를 표현하는 용도로 자주 사용됩니다.
-    Scalar_(_Tp v0, _Tp v1, _Tp v2 = 0, _Tp v3 = 0); // 순서대로 B, G, R로 사용되고 마지막은 PNG같은 파일에서의 투명도를 표현하는 용도소 사용됩니다.
+    Scalar_(_Tp v0, _Tp v1, _Tp v2 = 0, _Tp v3 = 0); // 순서대로 B, G, R로 사용되고 마지막은 PNG같은 파일에서의 투명도를 표현하는 용도로 사용됩니다.
     
     static Scalar_ <_Tp> all(_Tp v0); // 네 개의 val배열 값을 모두 v0로 설정한 Scalar_객체를 반환합니다.
 };
@@ -75,10 +75,10 @@ void Scalar0p()
 
 > OpenCV에서 Mat, vector<T>등의 다양한 타입을 표현할 수 있는 인터페이스 클래스로서, 주로 OpenCV함수의 입력 인자 자료형으로 사용됩니다. InputArray클래스를 이해하기 위해서는 _InputArray클래스의 정의부터 살펴봐야 하지만, _InputArray클래스는 단순히 사용의 편의성을 위해서 만들어진 구현체일 뿐 내부 인터페이스는 향수 필요에 따라 변경하게 될 가능성이 크므로 InputArray클래스를 어떻게 해석해야 하는지에 대해서만 이해하면 됩니다.
 
-+ _InputArray클래스는 Mat, Mat<_Tp>, vector<T> ... 가튼 다양한 타입으로부터 생성될 수 있는 인텊이스 클래스입니다. 따라서 _InputArray클래스는 OpenCV 라이브러리내부에서 코드 편의상 사용되며, 사용자가 명시적으로 _InputArray 클래스의 인스턴스 또는 변수를 생성하여 사용하는 것을 금지하고 있습니다. 따라서 특정 함수의 인자가 InputArray타입을 받도록 설정되어 있다면, Mat객체나 vector<T>객체 등을 전달하는 형태로 코드를 작성해야 합니다. 만약에 InputArray인자에 비어 있는 행렬을 전달하려면 함수 인자에 noArray() 또는 Mat()를 입력하면 됩니다.
++ _InputArray클래스는 Mat, Mat<_Tp>, vector<T> ... 같은 다양한 타입으로부터 생성될 수 있는 인터페이스 클래스입니다. 따라서 _InputArray클래스는 OpenCV 라이브러리 내부에서 코드 편의상 사용되며, 사용자가 명시적으로 _InputArray 클래스의 인스턴스를 생성하여 사용하는 것을 금지하고 있습니다. 따라서 특정 함수의 인자가 InputArray타입을 받도록 설정되어 있다면, Mat객체나 vector<T>객체 등을 전달하는 형태로 코드를 작성해야 합니다. 만약에 InputArray인자에 비어 있는 행렬을 전달하려면 함수 인자에 noArray() 또는 Mat()를 입력하면 됩니다.
 
 ```
-Mat _InputArray::getMat(int idx = 1) const; // idx로 참조할 행 변호를 설정하고 Mat 행렬 객체를 반홥합니다. idx < 0이면, 행렬 전체를 참조합니다.
+Mat _InputArray::getMat(int idx = 1) const; // idx로 참조할 행 변호를 설정하고 Mat 행렬 객체를 반환합니다. idx < 0이면, 행렬 전체를 참조합니다.
 ```
 
 ```
@@ -105,7 +105,7 @@ void printMat(InputArray _mat)
 
 ### OutputArray 클래스
 
-> OpenCV의 함수는 영상을 입력으로 받아 영상 처리를 수행하고 그 결과를 다시 영상으로 생성하여 반환하는데, 이 때 출력 영상을 return이 아니라 OutputArray클래스의 참조를 함수 인자로 사용하여 결과 영상을 전달합니다. _OutputArray클래스는 계층적으로 _InputAttay클래스를 상속받아 만들어졌으므료, _OutputArray클래스도 Mat 또는 vector<T>같은 객체로부터 생성될 수 있습니다. 다만 _OutputArray클래스에는 새로운 행렬을 생성하는 _OutputArray::create()함수가 추가적으로 정의되어 있어서 새로운 행렬 을 먼저 생성한 후에 영상 처리 결과를 저장하는 형태로 OpenCV의 함수 처리를 돕습니다.
+> OpenCV의 함수는 영상을 입력으로 받아 영상 처리를 수행하고 그 결과를 다시 영상으로 생성하여 반환하는데, 이 때 출력 영상을 return이 아니라 OutputArray클래스의 참조를 함수 인자로 사용하여 결과 영상을 전달합니다. _OutputArray클래스는 계층적으로 _InputAttay클래스를 상속받아 만들어졌으므로, _OutputArray클래스도 Mat 또는 vector<T>같은 객체로부터 생성될 수 있습니다. 다만 _OutputArray클래스에는 새로운 행렬을 생성하는 _OutputArray::create()함수가 추가적으로 정의되어 있어서 새로운 행렬을 먼저 생성한 후에 영상 처리 결과를 저장하는 형태로 OpenCV의 함수 처리를 돕습니다.
 
 + OutputArray클래스도 InputArray클래스와 마찬가지로 사용자가 직접 OutputArray타입의 객체를 생성해서 사용하면 안됩니다.
 
@@ -115,7 +115,7 @@ void printMat(InputArray _mat)
 
 ### VideoCapture클래스
 
-> 컴퓨터 비전 분야에서 정지 영상 데이터 뿐만 아니라 동영상 데이터를 불러와서 처리한다거나 혹은 컴퓨터에 연결된 카메라로부터 실시간으로 영상을 불러와서 처리하는 응용이 늘어나고 이습니다. 동영상이란 일련의 정지 영상을 압축하여 파일로 저장한 형태이고, 이 때 일련의 정지 영상을 프레임이라고 합니다. 따라서 동영상을 처리하는 작업은 동영상에서 프레임을 추출한 후에 각각의 프레임에 영상 처리 기법을 적용하는 형태로 이루어집니다. 이 때 VideoCapture클래스를 통하여 카메라 또는 동영상 파일로부터 영상 프레임을 받아올 수 있습니다.
+> 컴퓨터 비전 분야에서 정지 영상 데이터 뿐만 아니라 동영상 데이터를 불러와서 처리한다거나 혹은 컴퓨터에 연결된 카메라로부터 실시간으로 영상을 불러와서 처리하는 응용이 늘어나고 있습니다. 동영상이란 일련의 정지 영상을 압축하여 파일로 저장한 형태이고, 이 때 일련의 정지 영상을 프레임이라고 합니다. 따라서 동영상을 처리하는 작업은 동영상에서 프레임을 추출한 후에 각각의 프레임에 영상 처리 기법을 적용하는 형태로 이루어집니다. 이 때 VideoCapture클래스를 통하여 카메라 또는 동영상 파일로부터 영상 프레임을 받아올 수 있습니다.
 
 ```
 class VieoCaptrue
@@ -155,7 +155,7 @@ public:
 > CAP_IMAGES // OpenCV에서 지원하는 영상 파일
 > CAP_OPENCV_MJPEG // OpenCV에 내장된 MotionJPEG코덱
 
-+ VodeoCapture::operator>>()함수는 내부에서 VodeoCapture::read()함수를 호출하므로 사실상 같은 함수이고, VodeoCapture::read()함수는 VodeoCapture::grab()와 VodeoCapture::retrieve()함수를 합쳐놓은 형태라고 볼 수 있다. 여러 대의 장치로부터 동시에 영상을 획득하고 싶다면 >>연산자나 read()함수를 사용하기 보다는 좀 더 빠른 grab()함수와 retrieve()함수를 사용하는 것이 좋습니다. 그러나, 동기화를 고려하는 상황이 아니라면 편리하게 >>연산자나 read()함수를 사용해도 상관이 없습니다.
++ VodeoCapture::operator>>()함수는 내부에서 VodeoCapture::read()함수를 호출하므로 사실상 같은 함수이고, VodeoCapture::read()함수는 VodeoCapture::grab()와 VodeoCapture::retrieve()함수를 합쳐놓은 형태라고 볼 수 있다. 여러 대의 장치로부터 동시에 영상을 획득하고 싶다면 >>연산자나 read()함수보다는 좀 더 빠른 grab()함수와 retrieve()함수를 사용하는 것이 좋습니다. 그러나, 동기화를 고려하는 상황이 아니라면 편리하게 >>연산자나 read()함수를 사용해도 상관없습니다.
 
 + VideoCapturePropeties 열거형 상수
 > CAP_PROP_POS_MSEC // 비디오 파일에서 현재 위치(밀리 초 단위)
@@ -227,7 +227,7 @@ void camera_in()
 ```
 void video_in()
 {
-    VideoCapture cap("sample.avi"); // smaple.avi로 cap객체 생성
+    VideoCapture cap("output.avi"); // output.avi로 cap객체 생성
 
     if (! cap.isOpened()) // 객체가 정상적으로 생성되지 않으면 오류 출력
     {
@@ -369,7 +369,7 @@ void camera_in_video_out()
 
 ```
 void line(InputOutputArray img, Point pt1, Point pt2, const Scalar& color. int tickness = 1, int lineType = LINE_8, int shift = 0);
-// 입출력 영상 img를 넘겨받아서 시작점 pt1과 끝점pt2을 정한 다음에 선의 색상이나 밝기를 color인자를 통해 정하고 thickness로 전달받은 선의 두께만큼 lineType으로 선의 길이에서 shift만큼 오른쪽 비트 시프트한 크기의 선을 그립니다.
+// 입출력 영상 img를 넘겨받아서 시작점 pt1과 끝점 pt2을 정한 다음에 선의 색상이나 밝기를 color인자를 통해 정하고 thickness로 전달받은 선의 두께만큼 lineType으로 선의 길이에서 shift만큼 오른쪽 비트 시프트한 크기의 선을 그립니다.
 ```
 
 + LineTypes 열거형 상수
@@ -690,11 +690,11 @@ int main(void)
 
 ### 트랙바 사용하기
 
-> OpenCV를 이용하면 함수 몇 가지만 호춣해서 새로운 창을 만들고 영상을 출력할 수 있습니다. 이 때 창 안에 영상만 출력하는 것이 아니라 사용자의 입력을 받을 수 있는 Graphic User Interface를 추가하고 싶을 때도 있습니다. OpenCV는 다양한 운영체제에서 동작하기 때문에 많은 GUI를 제공하지는 않지만, 트랙바 인터페이스는 제공합니다. 트랙바는 다른 말로 슬라이더 컨트롤 이라고도 부릅니다
+> OpenCV를 이용하면 함수 몇 가지만 호출해서 새로운 창을 만들고 영상을 출력할 수 있습니다. 이 때 창 안에 영상만 출력하는 것이 아니라 사용자의 입력을 받을 수 있는 Graphic User Interface를 추가하고 싶을 때도 있습니다. OpenCV는 다양한 운영체제에서 동작하기 때문에 많은 GUI를 제공하지는 않지만, 트랙바 인터페이스는 제공합니다. 트랙바는 다른 말로 슬라이더 컨트롤 이라고도 부릅니다
 
 ```
 int createTrackbar(const String& trackbarname, const String& winname, int* value, int count, TrackbarCallback onChange = 0, void* userdata = 0);
-// trackbarname으로 트랙바의 이름을 받아서 winname 창에 트랩ㄱ바의 위치가 변경될 때마다 onChange함수를 실행합니다. 트랙바의 위치는 value로 받고, 트랙바의 최대 위치는 count로 받습니다.
+// trackbarname으로 트랙바의 이름을 받아서 winname 창에 트랙바의 위치가 변경될 때마다 onChange함수를 실행합니다. 트랙바의 위치는 value로 받고, 트랙바의 최대 위치는 count로 받습니다.
 ```
 
 ```
@@ -863,7 +863,7 @@ int main(void)
 > 사각형이 아닌 임의의 ROI(Region Of Interest)에 대하여, 그 부분에서만 연산을 할 수 있도록 도와주는 함수입니다. mask객체는 깊이가 CV_8U입니다.
 
 ```
-Mat& Mat::setTo(InputArray value, InputArray mask = noArray()) // mask로 넘겨받은 영역에 대하여 valu값으로 넘겨준 값으로 변경합니다. mask의 크기는 원본 객체와 같아야 하고, noArray()로 설정하면 모든 값에 대하여 마스크 연산을 수행합니다.
+Mat& Mat::setTo(InputArray value, InputArray mask = noArray()) // mask로 넘겨받은 영역에 대하여 value값으로 넘겨준 값으로 변경합니다. mask의 크기는 원본 객체와 같아야 하고, noArray()로 설정하면 모든 값에 대하여 마스크 연산을 수행합니다.
 void Mat::copyTo(OutputArray m, InputArray mask) const; // 기존 객체에서 mask에 해당하는 부분의 행렬만 m의 행렬로 교체합니다.
 ```
 
@@ -900,7 +900,7 @@ public:
 > 다음부터는 범용적으로 사용할 수 있는 OpenCV의 함수에 대해서 알아보겠습니다.
 
 ```
-Scalar sum(InputArray src); // 1~4채널인 src를 인자로 받아들여서 src내부의 모든 원소의 값을 채널 별로 반환합니다.
+Scalar sum(InputArray src); // 1~4채널인 src를 인자로 받아들여서 src내부의 모든 원소의 값을 채널별로 반환합니다.
 Scalar mean(InputArray src, InpurArray mask = noArray()); // 1~4채널의 src를 인자로 받아들여서 mask영역에 대한 평균을 구합니다. 이 때. mask영역이 noArray()이면 src안의 모든 값에 대한 평균을 구합니다.
 void minMaxLoc(InputArray src, double* minVal, double* maxVal = 0, Point* minLoc = 0, Point* maxLoc = 0, InputArray mask = noArray() // src로 받은 행렬에 대해서 최솟값을 minVal에 저장하고 그 위치를 minLoc에 저장하며, 최댓값을 maxVal에 저장하고, 그 위치를 maxLoc에 저장합니다. 이 때 마스크를 통해서 범위를 한정지을 수 있습니다.
 int cvRound(double value); // 실수값의 크기가 반올림했을 때 정수값 범위 이내에 있을 때, value의 반올림 값을 구합니다. 이 때, 소수점값이 정확하게 0.5이면 가장 가까운 짝수를 반환합니다. 만약에 정수값 범위 밖에 있는 실수의 경우, 알 수 없는 값이 반환됩니다.
