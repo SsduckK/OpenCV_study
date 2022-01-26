@@ -1,3 +1,8 @@
 chap5
 
 2022-01-26
+cvtColor
+change brightness
+histogram
+histogram stretching
+histogram equalization
