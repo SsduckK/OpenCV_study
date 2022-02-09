@@ -2,6 +2,10 @@
 
 
 
+### 기본 자료형 클래스
+
+
+
 #### Point_클래스
 
 - 2차원 평면 위에 있는 점의 좌표를 표현하는 템플릿 클래스
@@ -12,9 +16,9 @@
 template<typename_Tp> class Point_
 {
     public:
-    point_();									// 기본생성자, x = 0, y = 0 초기화
-    point_(_Tp_x, _Tp_y);						// (_x, _y)생성자, x = _x, y = _y 초기화
-    Point_(const point_& pt);					// 복사생성자, x = pt.x, y = pt.y 초기화
+    point_();								// 기본생성자, x = 0, y = 0 초기화
+    point_(_Tp_x, _Tp_y);					// (_x, _y)생성자, x = _x, y = _y 초기화
+    Point_(const point_& pt);				// 복사생성자, x = pt.x, y = pt.y 초기화
     
     point_& operator = (const Point_& pt);		// 대입 연산자 재정의
     
@@ -78,18 +82,18 @@ template<typename_Tp> class Size_
     
     Size_& operator = (const Size_& sz);	// 대입 연산자 재정의
     
-    _Tp area() const;	 // Size::area() 멤버 함수는 사각형 크기에 대한 면적을 반환
-    bool empty() const;	 // Size::empty() 멤버 함수는 유효하지 않은 크기면 true를 반환
+    _Tp area() const;	 	 // Size::area() 멤버 함수는 사각형 크기에 대한 면적을 반환
+    bool empty() const;	 	 // Size::empty() 멤버 함수는 유효하지 않은 크기면 true를 반환
     
-    _Tp width, height;	 // 멤버 변수, width = 가로, height = 세로
+    _Tp width, height;	 	 // 멤버 변수, width = 가로, height = 세로
 };
 
 // 다양한 자료형에 대한 Size_ 클래스 재정의
-typedef Size_<int>		Size2i;
+typedef Size_<int>	Size2i;
 typedef Size_<int64>	Size2l;
 typedef Size_<float>	Size2f;
 typedef Size_<double>	Size2d;
-typedef Size2i			Size;
+typedef Size2i		Size;
 ```
 
 - Size_ 클래스도 템플릿으로 정의되어 있으며, 다양한 자료형에 대해 이름이 재정의되어 있음
@@ -148,8 +152,8 @@ template<typename _Tp> class Rect_
 
 // 다양한 자료형에 대하여 Rect_ 클래스 이름 재정의
 typedef Rect_<int>		Rect2l;
-typedef Rect_<float>	Rect2f;
-typedef Rect_<double>	Rect2d;
+typedef Rect_<float>		Rect2f;
+typedef Rect_<double>		Rect2d;
 typedef Rect2i			Rect;
 ```
 
@@ -162,7 +166,7 @@ typedef Rect2i			Rect;
 Rect_ 클래스 사용법 예시
 
 ```c++
-Rect rc1;						 // rc1 = [0 x 0 from (0, 0)]
+Rect rc1;				 		 // rc1 = [0 x 0 from (0, 0)]
 Rect rc2(10, 10, 60 ,40);		 // rc2 = [60 x 40 from (10, 10)]
 Rect rc3 = rc1 + Size(50, 40);	 // rc3 = [50 x 40 from (0, 0)]
 Rect rc4 = rc2 + Point(10, 10);	 // rc4 = [60 x 40 from (20, 20)]
@@ -239,20 +243,20 @@ Rect br = rr1.boundingRect();	// 실수 단위로 얻고 싶다면 RotatedRect::
 class Range
 {
     public:
-    Range();							// 멤버 변수 초기화
-    Range(int_start, int _end);			// start = _start, end = _end
+    Range();						// 멤버 변수 초기화
+    Range(int_start, int _end);		// start = _start, end = _end
     
-    int size() const;					// Range::size() 범위 크기(start-end) 반환
-    bool empty() const;					// Range::empty() start와 end가 같으면 true를 변환
+    int size() const;				// Range::size() 범위 크기(start-end) 반환
+    bool empty() const;				// Range::empty() start와 end가 같으면 true를 변환
     static Range all();
     // Range::all() start=INT_MIN, end=INT_MAX로 설정한 Range 객체 반환
     
-    int start, endl;					// 멤버변수
+    int start, endl;				// 멤버변수
 }
 ```
 
 ```c++
-Range r1(0, 10);		//r1은 0부터 9까지 범위를 표현, 10은 포함되지 않음
+Range r1(0, 10);					//r1은 0부터 9까지 범위를 표현, 10은 포함되지 않음
 ```
 
 
