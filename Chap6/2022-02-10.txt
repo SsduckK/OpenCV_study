@@ -1,0 +1,14 @@
+Chap 6
+
+Arithmetic Operation of image
+  add
+  addWeighted
+  subtract
+  absdiff
+  multiply
+  divide
+Logical Operation of image
+  OR
+  AND
+  XOR
+  NOT
