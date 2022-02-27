@@ -1,0 +1,3 @@
+/home/kevin/workspace/OpenCV_Study/Source codes/Projects/from 1~6/build/CMakeFiles/rebuild_cache.dir
+/home/kevin/workspace/OpenCV_Study/Source codes/Projects/from 1~6/build/CMakeFiles/edit_cache.dir
+/home/kevin/workspace/OpenCV_Study/Source codes/Projects/from 1~6/build/CMakeFiles/project_one.dir
