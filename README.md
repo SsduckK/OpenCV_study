@@ -10,3 +10,7 @@
 1.5th week(2022.1.26) - ch5
 
 2.2nd week(2022.2.10) - ch6, Review 1~6
+
+2.3rd week(2022.2.17) - ch7
+
+3.3rd week(2022.3.15) - ch8, ch9.1
